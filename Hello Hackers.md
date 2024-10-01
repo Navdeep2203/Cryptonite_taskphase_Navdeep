@@ -1,6 +1,6 @@
 # Hello Hackers Module
 
-## Challenge
+## Intro to Commands
 For this challenge I was tasked with calling a command to access the Linux system and acquire a flag.
 
 ## Method
