@@ -214,3 +214,52 @@ pwn.college{QlbNBpaPpoUXrdYcali8k-GSw7k.dBTN1QDLzAjN0czW}
 
 ```
 
+## Challenge 8 : implicit relative path 
+In this challenge, the task was to execute a program named `run` located in the `/challenge ` directory using relative path.  The challenge helped to understand  Linux's behavior when it comes to executing programs in the current directory, particularly why naked paths (like run) won't work and how to resolve this issue by using the `./` notation. 
+
+### Method 
+1. Again, I reconnected to pwn.college server via the SSH.
+2. After connecting I navigated to the `/challenge` directory using the `cd` command.
+   `
+   cd /challenge
+   `
+3. Then I executed the program by specifying the relative path  using `./`.
+   ```
+   ./run
+   ```
+   The program ran successfully, and I got the output and the flag to proceed further.
+   ```
+   Correct!!!
+   ./run is a relative path, invoked from the right directory!
+   ```
+### Flag
+```
+pwn.college{0asfAPZFcoE2YEQWkPcEV0elI5_.dFTN1QDLzAjN0czW}
+```
+
+
+## Challenge 9: home sweet home 
+In this challenge, the goal was to use the home directory to write a file containing the flag by executing the program located at `/challenge/run`. This challenge emphasized understanding the use of absolute paths, specifically within the context of the home directory and the constraints regarding the argument provided to the command.
+
+### Method
+1. Firstly, I connected to the pwn.college server via the SSH.
+2. After connecting, I executed the program to write the flag to a file within my home directory.
+   ```
+   /challenge/run ~/f
+   ```
+   where the argument provided was `~/f` which expands to `/home/hacker/f`
+
+   I got the output as :
+   ```
+   Writing the file to /home/hacker/f!
+   ... and reading it back to you:
+   pwn.college{AVoGnTXdmMJZWeGsX1bAKpV6UMm.dNzM4QDLzAjN0czW}
+   ```
+   and got the flag.
+
+### Flag
+```
+pwn.college{AVoGnTXdmMJZWeGsX1bAKpV6UMm.dNzM4QDLzAjN0czW}
+```
+
+
