@@ -127,5 +127,99 @@ pwn.college{gfTbfHrsDd3s0SzYbxSo4VH7Tbg.dBzM4QDLzAjN0czW}
 
 ```
 
+## Challenge 7: removing files
+In this challenge, the task was to practice and learn how to remove files using the `rm `command. A file named `delete_me` was created in the home directory, and it was necessary to delete this file and verify its removal by running the command `/challenge/check`.
 
+### Method 
+1. Firstly, reconnected to the pwn.college server via the SSH.
+2. Then I ran the `rm` command with the argument `delete_me` to remove the file from the home directory.
+   ```
+   rm delete_me
+   ```
+3. Then I ran the command given to check if the file was deleted and obtained the flag.
+   ```
+   challenge/check
+   ```
+   which gave me the output.
+   ```
+   Excellent removal. Here is your reward:
+   pwn.college{Uxmw8SWigo5RFvPFFy1p1BWaIGD.dZTOwUDLzAjN0czW}
+   ```
+
+### Flag 
+```
+pwn.college{Uxmw8SWigo5RFvPFFy1p1BWaIGD.dZTOwUDLzAjN0czW}
+```
+
+## Challenge 8: hidden files
+
+In this challlenge, the task was to find a hidden file in the root directory(`/`) that contains the flag. Hidden files in linux are those that begin with a dot(`.`) and are not displayed when the directory contents are listed. To view hidden files, the `ls` command is used with the `-a` flag.
+
+### Method 
+1. Firstly, reestablish a connection with pwn.college server via the SSH.
+2. Then I used the `cd` command with the argument `/` which changes the current working directory to the root directory(`/`).
+
+```
+/cd
+```
+3. Then I used the `ls` command with the flag `-a` which lists all the files in the current directory, including hidden files(those starting with a dot).
+```
+ls -a
+```
+which gave me the output as
+```
+.   .dockerenv            bin   challenge  etc   lib    lib64   media  nix  proc  run   srv  tmp  var
+..  .flag-24303886531269  boot  dev        home  lib32  libx32  mnt    opt  root  sbin  sys  usr
+```
+where I found the hidden flag file (`.flag-24303886531269`).
+
+4. Then I displayed the contents of the hidden file using the `cat` command which gave me the flag to proceed .
+```
+cat /.flag-24303886531269
+```
+
+### Flag 
+```
+pwn.college{UoH_SHX_zttxlxAl-X7jsGK5d4r.dBTN4QDLzAjN0czW}
+```
+
+## Challenge 9 : An Epic Filesystem Quest
+In this challenge, the task was to implement the knowledge of basic Linux commands(`ls`,`cd` and `cat`) to navigate a filesystem and to find a hidden flag.
+
+The clues were provided in many files throughout the entire filesystem, guuiding the user to the next location in each of the clues. Some clues were hidden in files that required special handling, such as reading hidden files or entering directories to unlock further clues.
+
+### Method
+1. Firstly, I reestablished a connection to the pwn.college server via the SSH.
+```
+ssh -i /home/navdee2203/key hacker@dojo.pwn.college
+```
+2. Then I navigated to the root directory.
+   ```
+   cd /
+   ```
+3. Then I listed all the files in the root directory using the `ls` command.
+   ```
+   ls
+   ```
+   which gave me the output as
+   ```
+   NOTE  boot       dev  flag  lib    lib64   media  nix  proc  run   srv  
+   tmp  var
+   bin   challenge  etc  home  lib32  libx32  mnt    opt  root  sbin  sys  usr
+   ```
+   which had the file named `NOTE`.
+
+4. Then I displayed the contents of the `NOTE` file, which provided the next clue.
+   ```
+   cat /NOTE
+   ```
+
+
+   
+   
+
+   
+
+
+   
 
