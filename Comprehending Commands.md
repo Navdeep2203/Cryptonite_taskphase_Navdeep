@@ -209,10 +209,246 @@ ssh -i /home/navdee2203/key hacker@dojo.pwn.college
    ```
    which had the file named `NOTE`.
 
-4. Then I displayed the contents of the `NOTE` file, which provided the next clue.
+4. Then I displayed the contents of the `NOTE` file.
    ```
    cat /NOTE
    ```
+   which displayed the next clue.
+   ```
+   Lucky listing!
+   The next clue is in: /usr/local/lib/python3.8/dist-packages/future/moves/tkinter
+   Watch out! The next clue is **trapped**. You'll need to read it out without 'cd'ing into the directory; otherwise, the clue will self destruct!
+
+   ```
+5. Now the next clue was trapped and was to be read out without `cd`ing into the directory, so I used the `ls` command with the argument as the absolute path of the directory  to list the files inside it.
+   ```
+   ls  /usr/local/lib/python3.8/dist-packages/future/moves/tkinter
+   ```
+   which gave the output as
+   ```
+   README-TRAPPED  __pycache__      commondialog.py  dialog.py  filedialog.py  messagebox.py    simpledialog.py  ttk.py
+   __init__.py     colorchooser.py  constants.py     dnd.py     font.py  scrolledtext.py  tix.py
+   ```
+   which had the file `README-TRAPPED`.
+
+6. So I used the `cat` command to read the content of the file `README-TRAPPED`.
+   ```
+   cat  /usr/local/lib/python3.8/dist-packages/future/moves/tkinter/README-TRAPPED
+   ```
+   which gave me the next clue.
+   ```
+   Great sleuthing!
+   The next clue is in: 
+   /opt/ghidra/Ghidra/Features/FunctionGraphDecompilerExtension
+   ```
+7. Then I listed the files inside the given directory in the clue using the `ls` command.
+   ```
+   ls  /opt/ghidra/Ghidra/Features/FunctionGraphDecompilerExtension
+   ```
+   which gave me the output as
+   ```
+   LICENSE.txt  Module.manifest  REVELATION  data  lib
+   ```
+   which had the file named `REVELATION`.
+
+8. Then I read the contents of the file named `REVELATION` using the command `cat`.
+```
+Congratulations, you found the clue!
+The next clue is in: /opt/linux/linux-5.4/arch/x86/kernel/cpu/microcode
+
+Watch out! The next clue is **trapped**. You'll need to read it out without 'cd'ing into the directory; otherwise, the clue will self destruct!
+```
+   
+10. As the next clue was again trapped i.e it was to be read out without using `cd` command. So I used the `ls` command with the argument as the absolute path given in the clue of the directory to list the files inside it.
+    ```
+    ls  /opt/linux/linux-5.4/arch/x86/kernel/cpu/microcode
+    ```
+which gave me the output as 
+```
+INSIGHT-TRAPPED  Makefile  amd.c  amd.o  built-in.a  core.c  core.o  intel.c  intel.o
+```
+which had the file named `INSIGHT - TRAPPED`.
+
+11. So I read the contents of the file using `cat` command.
+    ```
+    cat  /opt/linux/linux-5.4/arch/x86/kernel/cpu/microcode/INSIGHT-TRAPPED
+    ```
+    which gave me the next clue.
+    ```
+    The next clue is in: /usr/local/lib/python3.8/dist-packages/ipython-8.12.3.dist-info
+
+    The next clue is **delayed** --- it will not become readable until you enter the directory with 'cd'.
+    ```
+
+12. As the next directory was to be used with `cd` command, I used the `cd` command to change the current working directory.
+    ```
+    cd /usr/local/lib/python3.8/dist-packages/ipython-8.12.3.dist-info
+    ```
+13. Then I used the `ls` command to list the files inside the directory.
+    ```
+    ls
+    ```
+    which gave me the output as
+    ```
+    HINT  INSTALLER  LICENSE  METADATA  RECORD  WHEEL  entry_points.txt  top_level.txt
+    ```
+    which had the file named `HINT`.
+    
+15. Then I read the contents of the file using the `cat` command.
+    ```
+    cat ./HINT
+    ```
+    which gave me the next clue.
+    ```
+    Congratulations, you found the clue!
+    The next clue is in: /opt/kropr/target/release/.fingerprint/colored-8b4bab611c508d2a
+
+    The next clue is **hidden** --- its filename starts with a '.' character. You'll need to look for it using special options to 'ls'.
+    ```
+16. Then I changed the current working directory to the directory given in the clue.
+    ```
+    cd  /opt/kropr/target/release/.fingerprint/colored-8b4bab611c508d2a
+    ```
+17. Then I listed out the files in the directory with the `-a` flag as it was given in the clue that the file is hidden.
+    ```
+    ls -a
+    ```
+    which gave the output as
+    ```
+    .  ..  .SECRET  dep-lib-colored  invoked.timestamp  lib-colored  lib-colored.json
+    ```
+    which had the file `.SECRET`.
+18. Next I read the contents of the file `.SECRET`.
+    ```
+    cat ./.SECRET
+    ```
+    which gave me the output as
+    ```
+    Great sleuthing!
+    The next clue is in: /usr/share/sphinx/themes/traditional
+
+    The next clue is **hidden** --- its filename starts with a '.' character. You'll need to look for it using special options to 'ls'.
+    ```
+19. Again now I changed the current working directory to the directory given in the clue.
+    ```
+    cd  /usr/share/sphinx/themes/traditional
+    ```
+20. Next, I used the `ls` command with the flag `-a` to show the all the files inside the directory including the hidden files.
+    ```
+    ls -a
+    ```
+    which gave me the output as
+    ```
+    .  ..  .TRACE  static  theme.conf
+    ```
+    which had the file named `.TRACE`.
+
+21. Then I used the ` cat` command to read the clue in the file.
+    ```
+     cat ./.TRACE
+    ```
+    which gave me the clue:
+    ```
+    Tubular find!
+    The next clue is in: /usr/lib/python3/dist-packages/jedi/third_party/typeshed/stdlib/3/asyncio
+    ```
+22. Then I listed the files inside the directory given in the clue using its absolute path.
+    ```
+     ls /usr/lib/python3/dist-packages/jedi/third_party/typeshed/stdlib/3/asyncio
+    ```
+    which gave me the output as
+    ```
+    EVIDENCE         constants.pyi   exceptions.pyi  proactor_events.pyi  runners.pyi          subprocess.pyi  windows_events.pyi
+    __init__.pyi     coroutines.pyi  futures.pyi     protocols.pyi        selector_events.pyi  tasks.pyi       windows_utils.pyi
+    base_events.pyi  events.pyi      locks.pyi       queues.pyi           streams.pyi          transports.pyi
+    ```
+    which had the file named `EVIDENCE`.
+
+23. Then I read the contents of the file using `cat` command.
+    ```
+    cat /usr/lib/python3/dist-packages/jedi/third_party/typeshed/stdlib/3/asyncio/EVIDENCE
+    ```
+    which gave me the next clue.
+
+    ```
+    Great sleuthing!
+    The next clue is in: /usr/local/lib/python3.8/dist-packages/mpmath
+
+    The next clue is **delayed** --- it will not become readable until you enter the directory with 'cd'.
+    ```
+24. Then I changed the current working directory using the `cd` command to the directory given in the clue.
+    ```
+    cd  /usr/local/lib/python3.8/dist-packages/mpmath
+    ```
+25. Then I listed the files inside it using the `ls` command.
+    ```
+    ls
+    ```
+    which gave me the output as
+    ```
+    CLUE         calculus     ctx_iv.py         function_docs.py   libmp     rational.py   visualization.py
+    __init__.py  ctx_base.py  ctx_mp.py         functions          math2.py  tests
+    __pycache__  ctx_fp.py    ctx_mp_python.py  identification.py  matrices  usertools.py
+
+    ```
+    which had the file named `CLUE`.
+26. Then I read the contents of the file by using the `cat` command.
+    ```
+     cat ./CLUE
+    ```
+    which finally gave me the flag.
+    ```
+    CONGRATULATIONS! Your perserverence has paid off, and you have found the flag!
+    It is: pwn.college{M1QMLOC433YTTn67kHgglkUK7G-.dljM4QDLzAjN0czW}
+    ```
+
+### FLAG
+```
+pwn.college{M1QMLOC433YTTn67kHgglkUK7G-.dljM4QDLzAjN0czW}
+```
+
+
+    
+    
+
+    
+ 
+    
+    
+
+    
+    
+    
+    
+
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+   
+
+   
+   
+
+   
+
+   
+   
+   
+   
+  
+
 
 
    
