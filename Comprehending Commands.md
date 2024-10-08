@@ -505,6 +505,40 @@ which gave me the flag to proceed.
 pwn.college{YuRWPwVhe8spy9TEp7LAM3Wb3-y.dJzM4QDLzAjN0czW}
 ```
 
+## Challenge 12 : linking files 
+
+In this challenge, the goal was to  trick the `/challenge/catflag` command, which normally reads the file /home/hacker/not-the-flag, into reading /flag instead, by using a symbolic link. 
+
+### Method
+1. Firstly, reconnected to the pwn.college server via the SSH.
+2. Then, I checked the contents of the `/home/hacker/not-the-flag` to understand what its currently reading.
+   ```
+   cat /home/hacker/not-the-flag
+   ```
+   which gave me the following output.
+   ```
+   cat: /home/hacker/not-the-flag: Permission denied
+   ```
+3. Then I created a symbolic link that points `/home/hacker/not-the-flag` to `/flag` by using the `ln -s` command.
+   ```
+   ln -sf /flag /home/hacker/not-the-flag
+   ```
+4. Then I executed the `/challenge/catflag` command to read the file through your symbolic link:
+   ```
+   /challenge/catflag
+   ```
+   which gave me the following output
+   ```
+   About to read out the /home/hacker/not-the-flag file!
+   pwn.college{0HCSDQ-LLQErTCLY5XCLubRX_Yp.dlTM1UDLzAjN0czW}
+   ```
+
+### Flag 
+```
+pwn.college{0HCSDQ-LLQErTCLY5XCLubRX_Yp.dlTM1UDLzAjN0czW}
+```
+
+
 
 
     
