@@ -301,6 +301,116 @@ In this challenge, the task was to explore how to redirect errors (stderr) into 
    ```
 
    ## Challenge 9: Duplicating piped data with tee
+
+   In this challenge, the task was to pipe the output of `/challenge/pwn` into `/challenge/college`, while intercepting 
+   the output using the `tee` command to understand what was being passed and debug the process.
+
+   ### Method
+   1. Firstly, reconnected to the pwn.college server via the SSH.
+   2. Then, I ran the following command to pipe the output of `/challenge/pwn` into `/challenge/college` while intercepting 
+      the data using tee:
+      ```
+      /challenge/pwn | tee intercept.txt | /challenge/college
+      ```
+      This showed the following message:
+      ```
+      The input to 'college' does not contain the correct secret code! This code
+      should be provided by the 'pwn' command. HINT: use 'tee' to intercept the
+      output of 'pwn' and figure out what the code needs to be.
+      ```
+
+   3. Then I checked the contents of `intercept.txt` to see what was being output by `/challenge/pwn`.
+      ```
+      cat intercept.txt
+      ```
+      which gave me the secret code and  revealed the usage information for `/challenge/pwn`.
+      ```
+      Usage: /challenge/pwn --secret [SECRET_ARG]
+
+      SECRET_ARG should be "QAU4S9nA"
+      hacker@piping~duplicating-piped-data-with-tee:~$ /challenge/pwn --secret QAU4S9nA
+      Processing...
+      You must pipe the output of /challenge/pwn into /challenge/college (or 'tee'
+      for debugging).
+
+      ```
+   4. With the secret code, I ran `/challenge/pwm` with the correct argument and piped the output to `/challenge/college`:
+      ```
+       /challenge/pwn --secret QAU4S9nA | /challenge/college
+
+      ```
+      which gave the following message and the flag to proceed.
+      ```
+      Processing...
+      Correct! Passing secret value to /challenge/college...
+      Great job! Here is your flag:
+      pwn.college{QAU4S9nAGwTvj_MM1wZfOvaJYWm.dFjM5QDLzAjN0czW}
+      ```
+
+   ### Flag
+   ```
+   pwn.college{QAU4S9nAGwTvj_MM1wZfOvaJYWm.dFjM5QDLzAjN0czW}
+   ```
+
+   ## Challenge 10: Writing to multiple programs
+    In this challenge,The task was to use process substitution to duplicate data into two commands simultaneously using 
+    tee. Specifically, we piped the output of /challenge/hack into both /challenge/the and /challenge/planet commands. The 
+    output was successfully intercepted, and the secret data was passed to both commands.
+
+   ### Method
+   1. Firstly, reconnected to the pwn.college server via the SSH.
+   2. Then I executed the command `/challenge/hack`, piped the output to the commands `/challenge/the` and 
+      `/challenge/planet` using the `tee` command.
+      ```
+      /challenge/hack | tee >( /challenge/the ) >( /challenge/planet )
+      ```
+      which gave the following message and the flag to proceed.
+      ```
+      This secret data must directly and simultaneously make it to /challenge/the and
+      /challenge/planet. Don't try to copy-paste it; it changes too fast.
+      2125910118312511341
+      Congratulations, you have duplicated data into the input of two programs! Here
+      is your flag:
+      pwn.college{Yiq5fXNXGFTCEAVnA_X_PCmVioh.dBDO0UDLzAjN0czW}
+
+      ```
+
+   ### Flag
+   ```
+   pwn.college{Yiq5fXNXGFTCEAVnA_X_PCmVioh.dBDO0UDLzAjN0czW}
+   ```
+
+   ## Challenge 11: Split- piping stderr and stdout
+   
+   In this challenge, the goal was to redirect the stdout from the /challenge/hack command to the /challenge/planet program 
+   and the stderr to the /challenge/the program simultaneously, without mixing the output and error streams. This required 
+   advanced knowledge of process substitution and redirection.
+
+   ### Method
+   1. Firstly, I reconnected to the pwn.college server via the SSH.
+   2. Then I used the command `/challenge/hack` which generates both stdout and stderr with `>` and `2>` operator used to redirect `stdout` and `stderr`.
+      ```
+      /challenge/hack > >( /challenge/planet ) 2> >( /challenge/the )
+      ```
+      After successful execution of the command I got the following mssage and the flag to proceed.
+      ```
+      Congratulations, you have learned a redirection technique that even experts
+      struggle with! Here is your flag:
+      pwn.college{EgkTyFDvPraOv5xWtdfGxu4G5r3.dFDNwYDLzAjN0czW}
+      ```
+   ### Flag
+   ```
+   pwn.college{EgkTyFDvPraOv5xWtdfGxu4G5r3.dFDNwYDLzAjN0czW}
+   ```
+
+   
+   
+
+    
+   
+      
+
+   
    
 
 
