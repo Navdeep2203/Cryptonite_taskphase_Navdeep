@@ -310,7 +310,7 @@ In this challenge, the task was to explore how to redirect errors (stderr) into 
    2. Then, I ran the following command to pipe the output of `/challenge/pwn` into `/challenge/college` while intercepting 
       the data using tee:
       ```
-      /challenge/pwn | tee intercept.txt | /challenge/college
+      /challenge/pwn | tee intercept | /challenge/college
       ```
       This showed the following message:
       ```
@@ -321,7 +321,7 @@ In this challenge, the task was to explore how to redirect errors (stderr) into 
 
    3. Then I checked the contents of `intercept.txt` to see what was being output by `/challenge/pwn`.
       ```
-      cat intercept.txt
+      cat intercept
       ```
       which gave me the secret code and  revealed the usage information for `/challenge/pwn`.
       ```
