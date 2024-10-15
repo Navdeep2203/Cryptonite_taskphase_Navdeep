@@ -112,7 +112,120 @@ You've set the COLLEGE variable to the proper value!
    pwn.college{Uu90d5Klt_fpj5KMM0_ybYXXOO0.dJjN1QDLzAjN0czW}
 ```
 
-## Challenge 5: 
+## Challenge 5: Printing Exported Variables
+In this challenge, the goal was to retrieve a flag from an environment variable using the `env` command, which lists all exported environment variables in the current shell session. After running the command, I was able to identify the FLAG variable, which contained the flag for this level.
+
+### Method
+1. Firstly, reconnected to the pwn.college server via the SSH.
+2. Then, I executed the command `env` in the shell.
+   ```
+   env
+   ```
+   which displayed the following output:
+```
+SHELL=/run/dojo/bin/bash
+HOSTNAME=variables~printing-exported-variables
+PWD=/home/hacker
+DOJO_AUTH_TOKEN=2a6b8ff75443534cfe0306a816e1527a76d4dda7840709b7747c8e141dd215a2
+HOME=/home/hacker
+LANG=C.UTF-8
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.7z=01;31:*.ace=01;31:*.alz=01;31:*.apk=01;31:*.arc=01;31:*.arj=01;31:*.bz=01;31:*.bz2=01;31:*.cab=01;31:*.cpio=01;31:*.crate=01;31:*.deb=01;31:*.drpm=01;31:*.dwm=01;31:*.dz=01;31:*.ear=01;31:*.egg=01;31:*.esd=01;31:*.gz=01;31:*.jar=01;31:*.lha=01;31:*.lrz=01;31:*.lz=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.lzo=01;31:*.pyz=01;31:*.rar=01;31:*.rpm=01;31:*.rz=01;31:*.sar=01;31:*.swm=01;31:*.t7z=01;31:*.tar=01;31:*.taz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tgz=01;31:*.tlz=01;31:*.txz=01;31:*.tz=01;31:*.tzo=01;31:*.tzst=01;31:*.udeb=01;31:*.war=01;31:*.whl=01;31:*.wim=01;31:*.xz=01;31:*.z=01;31:*.zip=01;31:*.zoo=01;31:*.zst=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:
+FLAG=pwn.college{USXdIwD3y9aA10tNufrJSMJw4w2.dhTN1QDLzAjN0czW}
+LESSCLOSE=/usr/bin/lesspipe %s %s
+TERM=xterm
+LESSOPEN=| /usr/bin/lesspipe %s
+SHLVL=1
+LC_CTYPE=C.UTF-8
+PATH=/run/challenge/bin:/run/workspace/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+_=/run/workspace/bin/env
+```
+3. Then I scanned through the output to find the `FLAG` variable in which the flag for this level was there.
+
+### Flag
+```
+pwn.college{USXdIwD3y9aA10tNufrJSMJw4w2.dhTN1QDLzAjN0czW}
+```
+
+## Challlenge 6: 
+In this challenge, I learned about command substitution in the shell. The task was to read the output of the `/challenge/run` command directly into a variable called `PWN`, which would contain the flag.
+
+### Method
+1. Firstly, reconnected to the pwn.college server via the SSH.
+2. Then,  I used the command substitution feature of the shell to store the output of the `/challenge/run` command in the variable `PWN`:
+   ```
+   PWN=$(/challenge/run)
+   ```
+   which gave the following message
+   ```
+   Congratulations! You have read the flag into the PWN variable. Now print it out
+   and submit it!
+   ```
+3. Then, I printed the value of the PWN variable to retrieve the flag:
+   ```
+   echo $PWN
+   ```
+   which printed the flag.
+
+### Flag
+```
+pwn.college{IFqjEmqHU0bgriAsZ5-Y2CIzaTn.dVzN0UDLzAjN0czW}
+```
+
+## Challenge 7: Reading Input
+In this challenge, I learned how to read user input using the `read` builtin command in the shell. The objective was to set the variable `PWN` to the value `COLLEGE`.
+
+### Method
+1. Firstly, reconnected to the pwn.college server via the SSH.
+2. Then, I executed the following command to read input and assign it to the variable `PWN`:
+   ```
+   read PWN
+   ```
+   which prompted me to input the value to the variable which I entered as `COLLEGE`.
+   ```
+   COLLEGE
+   ```
+   Upon successful execution, the system confirmed that the `PWN` variable was set properly and provided the flag:
+   ```
+   You've set the PWN variable properly! As promised, here is the flag:
+   pwn.college{UtpS_KgpDP8UqcIY6PEcLoEGq7n.dhzN1QDLzAjN0czW}
+   ```
+### Flag
+```
+pwn.college{UtpS_KgpDP8UqcIY6PEcLoEGq7n.dhzN1QDLzAjN0czW}
+```
+
+
+## Challenge 8: Reading Files
+In this challenge, the objective was to read the contents of a file directly into an environment variable using the read command with input redirection, instead of using a subshell with cat.
+
+### Method
+1. Firstly, reconnected to the pwn.college server via the SSH.
+2. To read the contents of the `/challenge/read_me` file directly into the` PWN `environment variable, I utilized the read command along with input redirection.
+   ```
+   read PWN < /challenge/read_me
+   ```
+   which gave the following output the flag to proceed.
+   ```
+   You've set the PWN variable properly! As promised, here is the flag:
+   pwn.college{EMiJVDen2SmQvFFh5paEuL4O7Dx.dBjM4QDLzAjN0czW}
+   ```
+
+### Flag
+```
+pwn.college{EMiJVDen2SmQvFFh5paEuL4O7Dx.dBjM4QDLzAjN0czW}
+```
+
+   
+
+ 
+
+   
+
+
+
+
+
+
 
 
    
