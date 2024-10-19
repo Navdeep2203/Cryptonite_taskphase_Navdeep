@@ -1,4 +1,4 @@
-# Ponddering PATH
+# Pondering PATH
 
 ## Challenge 1: 
 In this challenge, the task was to prevent the `/challenge/run` program from finding and executing the `rm` command, which would delete the flag file. By manipulating the PATH variable, I was able to achieve this.
