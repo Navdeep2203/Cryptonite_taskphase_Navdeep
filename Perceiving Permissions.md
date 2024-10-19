@@ -596,7 +596,280 @@ In this challenge, the task was to change the permissions of the `/challenge/pwn
    - the world doesn't have execute permissions
    ```
 
-4. 
+4. Accordingly, I set the permissions of the user to have read and write permissions, group to have none of the permissions and the world too have write permissions.
+   ```
+    chmod u=rw,g=-,o=w /challenge/pwn
+   ```
+   which displayed:
+   ```
+   You set the correct permissions!
+   Round 2 (of 8)!
+   
+   Current permissions of "/challenge/pwn": rw-----w-
+   * the user does have read permissions
+   * the user does have write permissions
+   - the user doesn't have execute permissions
+   - the group doesn't have read permissions
+   - the group doesn't have write permissions
+   - the group doesn't have execute permissions
+   - the world doesn't have read permissions
+   * the world does have write permissions
+   - the world doesn't have execute permissions
+   
+   Needed permissions of "/challenge/pwn": rw---xr--
+   * the user does have read permissions
+   * the user does have write permissions
+   - the user doesn't have execute permissions
+   - the group doesn't have read permissions
+   - the group doesn't have write permissions
+   * the group does have execute permissions
+   * the world does have read permissions
+   - the world doesn't have write permissions
+   - the world doesn't have execute permissions
+   ```
+5. Accordingly, I set the permissions of the group to have execute permissions, and the world to have read permissions.
+   ```
+   chmod g=x,o=r /challenge/pwn
+   ```
+   which displayed:
+   ```
+   You set the correct permissions!
+   Round 3 (of 8)!
+   
+   Current permissions of "/challenge/pwn": rw---xr--
+   * the user does have read permissions
+   * the user does have write permissions
+   - the user doesn't have execute permissions
+   - the group doesn't have read permissions
+   - the group doesn't have write permissions
+   * the group does have execute permissions
+   * the world does have read permissions
+   - the world doesn't have write permissions
+   - the world doesn't have execute permissions
+   
+   Needed permissions of "/challenge/pwn": rwxr-xrw-
+   * the user does have read permissions
+   * the user does have write permissions
+   * the user does have execute permissions
+   * the group does have read permissions
+   - the group doesn't have write permissions
+   * the group does have execute permissions
+   * the world does have read permissions
+   * the world does have write permissions
+   - the world doesn't have execute permissions
+   ```
+6. Accordingly, I set the permissions of the user to have all permissions, group to have read and execute permissions and the world to have read and write permisssions.
+   ```
+   chmod u=rwx,g=rx,o=rw /challenge/pwn
+   ```
+   which displayed:
+   ```
+   You set the correct permissions!
+   Round 4 (of 8)!
+   
+   Current permissions of "/challenge/pwn": rwxr-xrw-
+   * the user does have read permissions
+   * the user does have write permissions
+   * the user does have execute permissions
+   * the group does have read permissions
+   - the group doesn't have write permissions
+   * the group does have execute permissions
+   * the world does have read permissions
+   * the world does have write permissions
+   - the world doesn't have execute permissions
+   
+   Needed permissions of "/challenge/pwn": rwx---r--
+   * the user does have read permissions
+   * the user does have write permissions
+   * the user does have execute permissions
+   - the group doesn't have read permissions
+   - the group doesn't have write permissions
+   - the group doesn't have execute permissions
+   * the world does have read permissions
+   - the world doesn't have write permissions
+   - the world doesn't have execute permissions
+   ```
+7. Accordingly, I set the permissions of user to have all permissions, group to have none of the permissions, and the world to have read permission.
+   ```
+   chmod u=rwx,g=-,o=r /challenge/pwn
+   ```
+   which displayed:
+   ```
+   You set the correct permissions!
+   Round 5 (of 8)!
+   
+   Current permissions of "/challenge/pwn": rwx---r--
+   * the user does have read permissions
+   * the user does have write permissions
+   * the user does have execute permissions
+   - the group doesn't have read permissions
+   - the group doesn't have write permissions
+   - the group doesn't have execute permissions
+   * the world does have read permissions
+   - the world doesn't have write permissions
+   - the world doesn't have execute permissions
+   
+   Needed permissions of "/challenge/pwn": -wx-wxr-x
+   - the user doesn't have read permissions
+   * the user does have write permissions
+   * the user does have execute permissions
+   - the group doesn't have read permissions
+   * the group does have write permissions
+   * the group does have execute permissions
+   * the world does have read permissions
+   - the world doesn't have write permissions
+   * the world does have execute permissions
+   ```
+8. Accordingly, I set the permissions of user to have write and execute permissions, world to have write and execute permissions and the world to have read and execute permissions.
+   ```
+   chmod u=wx,g=wx,o=rx /challenge/pwn
+   ```
+   which displayed;
+   ```
+   You set the correct permissions!
+   Round 6 (of 8)!
+   
+   Current permissions of "/challenge/pwn": -wx-wxr-x
+   - the user doesn't have read permissions
+   * the user does have write permissions
+   * the user does have execute permissions
+   - the group doesn't have read permissions
+   * the group does have write permissions
+   * the group does have execute permissions
+   * the world does have read permissions
+   - the world doesn't have write permissions
+   * the world does have execute permissions
+   
+   Needed permissions of "/challenge/pwn": r-xrwx--x
+   * the user does have read permissions
+   - the user doesn't have write permissions
+   * the user does have execute permissions
+   * the group does have read permissions
+   * the group does have write permissions
+   * the group does have execute permissions
+   - the world doesn't have read permissions
+   - the world doesn't have write permissions
+   * the world does have execute permissions
+   ```
+9. Accordingly, I set the permissions of the user to have read and execute permissions, group to have all permissions and the world to have execute permisssions.
+    ```
+    chmod u=rx,g=rwx,o=x /challenge/pwn
+    ```
+    which displayed;
+   ```
+   You set the correct permissions!
+   Round 7 (of 8)!
+   
+   Current permissions of "/challenge/pwn": r-xrwx--x
+   * the user does have read permissions
+   - the user doesn't have write permissions
+   * the user does have execute permissions
+   * the group does have read permissions
+   * the group does have write permissions
+   * the group does have execute permissions
+   - the world doesn't have read permissions
+   - the world doesn't have write permissions
+   * the world does have execute permissions
+   
+   Needed permissions of "/challenge/pwn": rwx--x---
+   * the user does have read permissions
+   * the user does have write permissions
+   * the user does have execute permissions
+   - the group doesn't have read permissions
+   - the group doesn't have write permissions
+   * the group does have execute permissions
+   - the world doesn't have read permissions
+   - the world doesn't have write permissions
+   - the world doesn't have execute permissions
+   ```
+
+10. Accordingly, I set the permissions of the user to have all permissions,  group to have execute permissions and the world to have none of the permissions.
+    ```
+    chmod u=rwx,g=x,o=- /challenge/pwn
+    ```
+    which displayed:
+    ```
+    You set the correct permissions!
+      You've solved all 8 rounds! I have changed the ownership
+      of the /flag file so that you can 'chmod' it. You won't be able to read
+      it until you make it readable with chmod!
+      
+      Current permissions of "/flag": ---------
+      - the user doesn't have read permissions
+      - the user doesn't have write permissions
+      - the user doesn't have execute permissions
+      - the group doesn't have read permissions
+      - the group doesn't have write permissions
+      - the group doesn't have execute permissions
+      - the world doesn't have read permissions
+      - the world doesn't have write permissions
+      - the world doesn't have execute permissions
+    ```
+11. Since the `/flag` file had none of the permissions, I set the user to have read permissions for the `/flag` file.
+    ```
+     chmod u+r /flag
+    ```
+12. Then I read the contents of the `/flag` file , which finally displayed the flag for this challenge.
+    ```
+    cat /flag
+    ```
+
+### Flag
+```
+pwn.college{IzeYhAXYvgmHs3xBbdcrw5FqfhV.dNTM5QDLzAjN0czW}
+```
+
+## Challenge 8: The SUID Bit
+In this challenge, the task was to add the Set User ID (SUID) bit to the `/challenge/getroot` program, allowing it to run with elevated permissions (as root) so that I could access the flag.
+
+### Method
+1. Firstly, reconnected to the pwn.college server via the SSH.
+2. Initially, I checked the permissions of the `/challenge/getroot` program.
+```
+ls -l /challenge/getroot
+```
+which showed:
+```
+-rwxr-xr-x 1 root root 155 Jul 12 10:30 /challenge/getroot
+```
+3. I used the `chmod` command to add the SUID bit to the program, allowing it to execute with the permissions of the file owner (root).
+   ```
+   chmod u+s /challenge/getroot
+   ```
+4. After setting the SUID bit, I checked the permissions again to confirm that it was successfully applied.
+   ```
+   ls -l /challenge/getroot
+   ```
+   which displayed:
+   ```
+   -rwsr-xr-x 1 root root 155 Jul 12 10:30 /challenge/getroot
+   ```
+   The s in place of the executable bit confirmed that the SUID bit was set.
+
+5. I then executed the `/challenge/getroot` program, which now ran with elevated privileges.
+   ```
+   /challenge/getroot
+   ```
+   which displayed the following message:
+   ```
+   SUCCESS! You have set the suid bit on this program, and it is running as root!
+   Here is your shell...
+   ```
+6. With access to a root shell, I used the cat command to display the flag for this challenge.
+   
+   ```
+   cat /flag
+   ```
+
+### Flag
+```
+pwn.college{YlQQJsBek58p6TnQB7_-cZpYv-T.dNTM2QDLzAjN0czW}
+```
+
+   
+
+
+   
    
 
 
