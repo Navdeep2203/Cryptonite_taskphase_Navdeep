@@ -530,7 +530,75 @@ pwn.college{EUlWoePVson3oqdKlbN1Xfz5_TB.dBTM2QDLzAjN0czW}
 ```
 
 ##  Challenge 7: Permissions Setting Practice
-In this challenge, 
+In this challenge, the task was to change the permissions of the `/challenge/pwn` file multiple times according to specific instructions but this time instead of tweaking , permission setting had to be used(`=`) The goal was to successfully adjust the permissions eight times in a row, allowing me to eventually make the `/flag` file readable for myself.
+
+### Method
+1. Firstly, reconnected to the pwn.college server via the SSH.
+2. Then, I executed the following command to start the challenge.
+   ```
+   /challenge/run
+   ```
+   which displayed the first round of setting permissions.
+   ```
+   Round 0 (of 8)!
+
+   Current permissions of "/challenge/pwn": rw-r--r--
+   * the user does have read permissions
+   * the user does have write permissions
+   - the user doesn't have execute permissions
+   * the group does have read permissions
+   - the group doesn't have write permissions
+   - the group doesn't have execute permissions
+   * the world does have read permissions
+   - the world doesn't have write permissions
+   - the world doesn't have execute permissions
+   
+   Needed permissions of "/challenge/pwn": rwxr-----
+   * the user does have read permissions
+   * the user does have write permissions
+   * the user does have execute permissions
+   * the group does have read permissions
+   - the group doesn't have write permissions
+   - the group doesn't have execute permissions
+   - the world doesn't have read permissions
+   - the world doesn't have write permissions
+   - the world doesn't have execute permissions
+   ```
+3. So accordingly , I set the permissions of the user to have all permissions,group to have read permission, and the world to have no permission.
+   ```
+   chmod u=rwx,g=r,o=- /challenge/pwn
+   ```
+   which displayed:
+   ```
+   You set the correct permissions!
+   Round 1 (of 8)!
+   
+   Current permissions of "/challenge/pwn": rwxr-----
+   * the user does have read permissions
+   * the user does have write permissions
+   * the user does have execute permissions
+   * the group does have read permissions
+   - the group doesn't have write permissions
+   - the group doesn't have execute permissions
+   - the world doesn't have read permissions
+   - the world doesn't have write permissions
+   - the world doesn't have execute permissions
+   
+   Needed permissions of "/challenge/pwn": rw-----w-
+   * the user does have read permissions
+   * the user does have write permissions
+   - the user doesn't have execute permissions
+   - the group doesn't have read permissions
+   - the group doesn't have write permissions
+   - the group doesn't have execute permissions
+   - the world doesn't have read permissions
+   * the world does have write permissions
+   - the world doesn't have execute permissions
+   ```
+
+4. 
+   
+
 
 
     
