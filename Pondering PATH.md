@@ -119,7 +119,7 @@ In this challenge, the goal was to hijack the `rm `command to prevent it from de
    ```
 5. To ensure my custom `rm `command would be used instead of the system one, I updated the PATH environment variable to prioritize my home directory.
    ```
-   export PATH=/home/hacker:$PATH
+    PATH=/home/hacker:$PATH
    ```
 6.  I checked that the correct` rm` command was being called.
    ```
