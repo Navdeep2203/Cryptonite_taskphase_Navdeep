@@ -363,7 +363,178 @@ The goal of this level was to find the password for Bandit Level 12, which was s
    ```
 
 ## Level 12 -> Level 13
+The task of this challenge was to extract a password from a hexdump file (`data.txt`) that contained data repeatedly compressed in various formats.
 
+### Method
+1. I logged into Bandit Level 12 using the following command:
+   ```
+   ssh bandit12@bandit.labs.overthewire.org -p 2220
+   ```
+2. Then, I created a temporary working directory using the `mktemp -d` command:
+   ```
+   mktemp -d
+   ```
+   which created a temporary directory named
+   ```
+   /tmp/tmp.gs6YsWVLIi
+   ```
+3. Then I navigated to the temperorary directory:
+   ```
+   cd /tmp/tmp.gs6YsWVLIi
+   ```
+4. Then I copied the data.txt file into the directory:
+   ```
+   cp ~/data.txt .
+   ```
+5. Then I used `xxd -r` to reverse the hexdump back into a binary file:
+   ```
+   xxd -r data.txt org_file
+   ```
+6. Next I checked the compression format of `org_file` using the `file` command:
+   ```
+   file org_file
+   ```
+   which returned:
+   ```
+   org_file: gzip compressed data, was "data2.bin", last modified: Thu Sep 19 07:08:15 2024, max compression, from Unix, original size modulo 2^32 574
+   ```
+   This identified the file as gzip compressed data.
+
+7. Then I renamed and uncompressed the file using gunzip:
+   ```
+   mv org_file org_file.gz
+   gunzip org_file.gz
+   ```
+8. Next I again checked the file format of `org_file`:
+   ```
+   file org_file
+   ```
+   which returned
+   ```
+   org_file: bzip2 compressed data, block size = 900k
+   ```
+   This identified the file as bzip2 compressed data.
+9. Then I renamed and uncompressed the file using bunzip2:
+   ```
+   mv org_file org_file.bz2
+   bunzip2 org_file.bz2
+   ```
+10. Next I again checked the file format of `org_file`:
+    ```
+    file org_file
+    ```
+    which returned
+    ```
+    org_file: gzip compressed data, was "data4.bin", last modified: Thu Sep 19 07:08:15 2024, max compression, from Unix, original size modulo 2^32 20480
+    ```
+     This identified the file as gzip compressed data.
+
+11. Then I renamed and uncompressed the file using gunzip:
+   ```
+   mv org_file org_file.gz
+   gunzip org_file.gz
+   ```
+12. Next I again checked the file format of `org_file`:
+   ```
+   file org_file
+   ```
+   which returned
+   ```
+   org_file: POSIX tar archive (GNU)
+   ```
+   This identified the file format as a tar archive.
+13. Then I extracted  the contents of a tar archive while showing details of the files being extracted.
+```
+tar -xvf org_file
+```
+which displayed:
+```
+data5.bin
+```
+14. Next I checked the file format of `data5.bin`
+```
+data5.bin: POSIX tar archive (GNU)
+```
+This identified the file format as a tar archive.
+
+14.  Then again I extracted  the contents of a tar archive while showing details of the files being extracted.
+    ```
+    tar -xvf data5.bin
+    ```
+    which displayed:
+    ```
+    data6.bin
+    ```
+15. Next I checked the file format of `data6.bin`.
+```
+file data6.bin
+```
+which displayed:
+```
+data6.bin: bzip2 compressed data, block size = 900k
+```
+This identified the file as bzip2 compressed data.
+16. Then I renamed and uncompressed the file using bunzip2:
+   ```
+   mv data6.bin data6.bin.bz2
+   bunzip2 data6.bin.bz2
+   ```
+17. Next I again checked the file format of `data6.bin`
+    ```
+    file data6.bin
+    ```
+    which displayed:
+    ```
+    data6.bin: POSIX tar archive (GNU)
+    ```
+    This identified the file as tar archive.
+18.  Then again I extracted  the contents of a tar archive while showing details of the files being extracted.
+    ```
+    tar -xvf data6.bin
+    ```
+    which displayed:
+```
+data8.bin
+```
+
+19. Then I checked the file format of `data8.bin`:
+    ```
+    file data8.bin
+    ```
+    which displayed:
+    ```
+    data8.bin: gzip compressed data, was "data9.bin", last modified: Thu Sep 19 07:08:15 2024, max compression, from Unix, original size modulo 2^32 49
+    ```
+    This identified the file as gzip compressed data.
+20. Then I renamed and uncompressed the file using gunzip:
+    ```
+     mv data8.bin data8.bin.gz
+    gunzip data8.bin.gz
+    ```
+21. Then I again checked the file format of `data8.bin`
+    ```
+    file data8.bin
+    ```
+    which showed:
+    ```
+    data8.bin: ASCII text
+    ```
+    After multiple iterations of compression extraction, the final file (`data8.bin`) was identified as an ASCII text file:
+
+22. The password was extracted by reading the content of the file:
+    ```
+    cat data8.bin
+    ```
+    which displayed the password for the next level:
+    ```
+    The password is FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn\
+    ```
+    
+
+
+
+
+   
 
 
 
